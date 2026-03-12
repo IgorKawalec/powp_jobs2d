@@ -25,12 +25,13 @@ public class DriverAdapter extends DrawPanelController implements Job2dDriver {
 	public void operateTo(int x, int y) {
 		ILine line = LineFactory.getBasicLine();
 		line.setStartCoordinates(this.startX, this.startY);
-		line.setEndCoordinates(x, y);
+		line.setEndCoordinates(x,y);
+		this.setPosition(x,y);
 
 		drawLine(line);
 	}
 
-	
+
 	@Override
 	public String toString() {
 		return "Driver Adapter";
