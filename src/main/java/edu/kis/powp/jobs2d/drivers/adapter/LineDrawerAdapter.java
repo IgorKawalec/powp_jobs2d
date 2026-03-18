@@ -12,7 +12,7 @@ public class LineDrawerAdapter implements Job2dDriver{
     public void setLine(ILine type){
         this.line=type;
     }
-    
+
     public LineDrawerAdapter(ILine type){
         this.drawPanelController=DrawerFeature.getDrawerController();
         this.line=type;

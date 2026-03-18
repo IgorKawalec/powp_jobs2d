@@ -13,6 +13,8 @@ import edu.kis.powp.jobs2d.events.SelectChangeVisibleOptionListener;
 import edu.kis.powp.jobs2d.events.SelectTestFigureOptionListener;
 import edu.kis.powp.jobs2d.features.DrawerFeature;
 import edu.kis.powp.jobs2d.features.DriverFeature;
+import edu.kis.legacy.drawer.shape.LineFactory;
+import edu.kis.powp.jobs2d.drivers.adapter.LineDrawerAdapter;
 
 public class TestJobs2dPatterns {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -34,6 +36,17 @@ public class TestJobs2dPatterns {
 		application.addTest("Pat Tern", selectTestFigure2OptionListener);
 	}
 
+
+	private static void setupLineSettings(Application application, LineDrawerAdapter adapter) {
+		application.addComponentMenu(LineDrawerAdapter.class, "Line Settings", 4);
+		application.addComponentMenuElement(LineDrawerAdapter.class, "Basic Line",
+				(ActionEvent e) -> adapter.setLine(LineFactory.getBasicLine()));
+		application.addComponentMenuElement(LineDrawerAdapter.class, "Dotted Line",
+				(ActionEvent e) -> adapter.setLine(LineFactory.getDottedLine()));
+		application.addComponentMenuElement(LineDrawerAdapter.class, "Cyan Dotted Line",
+				(ActionEvent e) -> adapter.setLine(LineFactory.getSpecialLine()));
+	}
+
 	/**
 	 * Setup driver manager, and set default driver for application.
 	 * 
@@ -47,6 +60,9 @@ public class TestJobs2dPatterns {
 		Job2dDriver testDriver = new DriverAdapter();
 		DriverFeature.addDriver("Driver Adapter", testDriver);
 
+		LineDrawerAdapter lineDriver = new LineDrawerAdapter(LineFactory.getBasicLine());
+		DriverFeature.addDriver("Line Driver", lineDriver);
+		setupLineSettings(application, lineDriver);
 
 		DriverFeature.updateDriverInfo();
 	}
